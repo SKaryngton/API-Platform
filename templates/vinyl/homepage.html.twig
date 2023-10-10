@@ -1,0 +1,20 @@
+
+{% extends 'base.html.twig' %}
+{% block title %}{{ title? title:'' }}{% endblock %}
+
+
+{% block body %}
+    <img width="50" height="50" src="{{ asset('BluRayDiscBack.png') }}">
+
+    <ul {{ stimulus_controller('hello') }}>
+        {% for track in tracks %}
+            <li {{ stimulus_controller('hello', {
+                                      infoUrl: path('app_browse', { slug: loop.index })
+                                      }) }}>
+               {{ track.song }} - {{ track.artist | upper }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
