@@ -4,7 +4,7 @@ yel { color: #9ea647}
 blue { color: #099fc0}
 red {color: #ce4141}
 </style>
-# [<green>Symfony](https://symfony.com)
+# [<green>Symfony6](https://symfony.com)
 
 ## <green>Technische Anforderungen / Technical Requirements/Pre-requis techniques
 - ### <yel>install/installiere
