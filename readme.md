@@ -1,13 +1,8 @@
-﻿﻿<style>
-green { color: #299660}
-yel { color: #9ea647}
-blue { color: #099fc0}
-red {color: #ce4141}
-</style>
+
 # [<green>Symfony6](https://symfony.com)
 
-## <green>Technische Anforderungen / Technical Requirements/Pre-requis techniques
-- ### <yel>install/installiere
+## <font color="green"> Technische Anforderungen / Technical Requirements/Pre-requis techniques </font>
+- ### install/installiere
     - PHP  and PHP-extensions/erweiterungen/extensions
     - Composer
     - Symfony CLI
