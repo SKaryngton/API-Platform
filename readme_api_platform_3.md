@@ -1,13 +1,8 @@
-﻿﻿<style>
-green { color: #299660}
-yel { color: #9ea647}
-blue { color: #099fc0}
-red {color: #ce4141}
-</style>
-# [<green>API-Platform 3](https://api-platform.com)
 
-## <green>Technische Anforderungen / Technical Requirements/Pre-requis techniques
-- ### <yel>install/installiere
+# [API-Platform 3](https://api-platform.com)
+
+## Technische Anforderungen / Technical Requirements/Pre-requis techniques
+- ### install/installiere
     - Api-platform
        ```
        composer require api
