@@ -1,7 +1,7 @@
 
-# [<green>Symfony6](https://symfony.com)
+# [Symfony6](https://symfony.com)
 
-## <font color="green"> Technische Anforderungen / Technical Requirements/Pre-requis techniques </font>
+## Technische Anforderungen / Technical Requirements/Pre-requis techniques 
 - ### install/installiere
     - PHP  and PHP-extensions/erweiterungen/extensions
     - Composer
