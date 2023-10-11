@@ -9,7 +9,7 @@
       
       go to  https://localhost/api
       
-      enable docker
+      enable docker 
       
        ```
 - ###  Creating ApiResource  / erstellen ApiResource
@@ -437,4 +437,46 @@ User Entity
     normalizationContext: ['groups' => ['user:read']],
 )]
 
+```
+
+- ### Api-platform React-Admin
+
+```
+   - npm install @api-platform/admin -D
+   
+   - composer require symfony/ux-react
+   
+   - npm install react -D
+   
+   - assets/react/controllers/ReactAdmin.jsx
+   
+   import { HydraAdmin } from "@api-platform/admin";
+   import React from 'react';
+
+
+    export default (props) => (
+    <HydraAdmin entrypoint={props.entrypoint} />
+     );
+     
+    - src/Controller/ApiAdminController.php
+    
+     class ApiAdminController extends  AbstractController
+    {
+
+        #[Route('/admin')]
+        public function dashboard(): Response
+        {
+            return $this->render('admin/dashboard.html.twig');
+        }
+     }
+     
+    - templates/admin/dashboard.html.twig
+    
+      {% extends 'base.html.twig' %}
+        {% block body %}
+            <div {{ react_component('ReactAdmin', {
+                entrypoint: path('api_entrypoint')
+            }) }}></div>
+        {% endblock %} 
+     
 ```
