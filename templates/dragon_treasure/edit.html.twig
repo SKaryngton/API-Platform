@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DragonTreasure{% endblock %}
+
+{% block body %}
+    <h1>Edit DragonTreasure</h1>
+
+    {{ include('dragon_treasure/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_dragon_treasure_index') }}">back to list</a>
+
+    {{ include('dragon_treasure/_delete_form.html.twig') }}
+{% endblock %}

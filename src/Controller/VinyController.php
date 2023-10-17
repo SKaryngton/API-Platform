@@ -7,10 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use function Symfony\Component\String\u;
 
+
 class VinyController extends AbstractController
 {
 
-    #[Route('/', name: 'app_homepage')]
+    #[Route('/vinyl', name: 'app_vinyl')]
     public function homepage():Response{
 
         $tracks = [

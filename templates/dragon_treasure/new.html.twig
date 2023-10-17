@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DragonTreasure{% endblock %}
+
+{% block body %}
+    <h1>Create new DragonTreasure</h1>
+
+    {{ include('dragon_treasure/_form.html.twig') }}
+
+    <a href="{{ path('app_dragon_treasure_index') }}">back to list</a>
+{% endblock %}

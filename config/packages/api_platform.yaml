@@ -15,3 +15,5 @@ api_platform:
         html: [ 'text/html' ]
         jsonhal: [ 'application/hal+json' ]
         csv: ['text/csv']
+
+    enable_docs: true

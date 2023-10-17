@@ -1,3 +1,4 @@
+import { registerVueControllerComponents } from '@symfony/ux-vue';
 import { registerReactControllerComponents } from '@symfony/ux-react';
 import './bootstrap.js';
 /*
@@ -11,3 +12,4 @@ import './bootstrap.js';
 import './styles/app.css';
 
 registerReactControllerComponents(require.context('./react/controllers', true, /\.(j|t)sx?$/));
+registerVueControllerComponents(require.context('./vue/controllers', true, /\.vue$/));

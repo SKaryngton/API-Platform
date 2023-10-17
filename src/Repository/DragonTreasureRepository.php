@@ -21,6 +21,23 @@ class DragonTreasureRepository extends ServiceEntityRepository
         parent::__construct($registry, DragonTreasure::class);
     }
 
+
+
+//Filter
+    public function filterByCreatedAt(\DateTime $startAt , \DateTime $endAt ):array
+    {
+        return $this->createQueryBuilder('d')
+            ->andWhere('d.createdAt >= :startAt')
+            ->setParameter('startAt', $startAt)
+            ->andWhere('d.createdAt <= :endAt')
+            ->setParameter('endAt', $endAt)
+            ->getQuery()
+            ->getResult();
+
+
+
+    }
+
 //    /**
 //     * @return DragonTreasure[] Returns an array of DragonTreasure objects
 //     */
