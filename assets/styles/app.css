@@ -11,3 +11,28 @@
 .book {
     background-color: #D0B294;
 }
+
+/* Standard syntax */
+::placeholder {
+    font-size: 8px;
+}
+
+/* WebKit browsers (e.g., Chrome, Safari) */
+::-webkit-input-placeholder {
+    font-size: 8px;
+}
+
+/* Firefox */
+::-moz-placeholder {
+    font-size: 8px;
+}
+
+/* Microsoft Edge and Internet Explorer */
+:-ms-input-placeholder {
+    font-size: 8px;
+}
+
+/* Microsoft Edge (legacy versions) */
+::-ms-input-placeholder {
+    font-size: 8px;
+}

@@ -27,6 +27,7 @@ class DragonTreasureController extends AbstractController
         $dragonTreasure=[];
 
         if($startDate && $endDate){
+
             $s= \DateTime::createFromFormat('Y-m-d H:i',$startDate);
             $e= \DateTime::createFromFormat('Y-m-d H:i',$endDate);
 
