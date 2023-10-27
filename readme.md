@@ -258,7 +258,7 @@ yarn add @fortawesome/fontawesome-free --dev
 -yarn install
 -yarn watch
 
-
+- npx stimulus generate hello
 -create assets/controllers/hello_controller
 import { Controller } from '@hotwired/stimulus';
 
