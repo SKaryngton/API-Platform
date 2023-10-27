@@ -4,6 +4,8 @@ namespace App\Repository;
 
 use App\Entity\DragonTreasure;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -21,7 +23,56 @@ class DragonTreasureRepository extends ServiceEntityRepository
         parent::__construct($registry, DragonTreasure::class);
     }
 
-//    /**
+        public function findAllQuery(): Query
+        {
+        return $this->createQueryBuilder('d')
+            ->getQuery();
+    }
+    public function findByNameLike(string $name): Query
+    {
+        return $this->createQueryBuilder('d')
+            ->where('d.name LIKE :query')
+            ->setParameter('query', '%' . $name . '%')
+            ->getQuery();
+    }
+
+    public function findByOwnerUsername(string $name):Query
+    {
+        return $this->createQueryBuilder('d')
+            ->join('d.owner', 'o')
+            ->where('o.username = :query')
+            ->setParameter('query', $name)
+            ->getQuery();
+    }
+
+
+    public function findByFilters($filters)
+    {
+        $qb = $this->createQueryBuilder('d');
+
+        if (isset($filters['user'])) {
+            $qb->join('d.owner', 'o')
+                ->where('o.username = :query')
+                ->setParameter('query', $filters['user'])
+                ->getQuery();
+        }
+
+        if (isset($filters['startDate'])) {
+            $qb->andWhere('d.createdAt >= :startDate')
+                ->setParameter('startDate', $filters['startDate']);
+        }
+
+        if (isset($filters['endDate'])) {
+            $qb->andWhere('d.createdAt <= :endDate')
+                ->setParameter('endDate', $filters['endDate']);
+        }
+
+        return $qb->getQuery();
+    }
+
+
+
+    //    /**
 //     * @return DragonTreasure[] Returns an array of DragonTreasure objects
 //     */
 //    public function findByExampleField($value): array
@@ -45,4 +96,5 @@ class DragonTreasureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 }

@@ -1,20 +1,73 @@
 
 {% extends 'base.html.twig' %}
-{% block title %}{{ title? title:'' }}{% endblock %}
+{% block title %}List of DragonTreasures and their Owners{% endblock %}
 
 
 {% block body %}
-    <img width="50" height="50" src="{{ asset('BluRayDiscBack.png') }}">
+    <div class="container">
+        <h1 class="my-4 ">List of DragonTreasures and their Owners</h1>
+        <div class="mb-3">
+            {{ form_start(searchForm, {'attr': {'class': 'd-flex justify-content-between'}}) }}
+            {{ form_row(searchForm.query) }}
+            <button type="submit" class="btn btn-primary ">Search</button>
+            {{ form_end(searchForm) }}
+        </div>
 
-    <ul {{ stimulus_controller('hello') }}>
-        {% for track in tracks %}
-            <li {{ stimulus_controller('hello', {
-                                      infoUrl: path('app_browse', { slug: loop.index })
-                                      }) }}>
-               {{ track.song }} - {{ track.artist | upper }}
-            </li>
-        {% endfor %}
-    </ul>
+        <!-- Dropdown for selecting user -->
+        <div class="mb-3">
+            {{ form_start(userSelectForm) }}
 
+                <div class="row">
+                    <div class="col">
+                        {{ form_widget(userSelectForm.user) }}
+                    </div>
+
+                    <div class="col">
+                        {{ form_label(userSelectForm.startDate) }}
+                        {{ form_widget(userSelectForm.startDate) }}
+                    </div>
+
+                    <div class="col">
+                        {{ form_label(userSelectForm.endDate) }}
+                        {{ form_widget(userSelectForm.endDate) }}
+                    </div>
+
+                    <div class="col">
+                        {{ form_widget(userSelectForm.filter) }}
+                    </div>
+
+            </div>
+            {{ form_end(userSelectForm) }}
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col">{{ knp_pagination_sortable(dragonTreasures, 'ID', 'd.id') }}</th>
+                <th scope="col">{{ knp_pagination_sortable(dragonTreasures, 'Name', 'd.name') }}</th>
+                <th scope="col">Description</th>
+                <th scope="col">Value</th>
+                <th scope="col">CFactor</th>
+                <th>Created At</th>
+                <th>Is Published</th>
+                <th scope="col">Owner</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for dragonTreasure in dragonTreasures %}
+                <tr>
+                    <th scope="row">{{ dragonTreasure.id }}</th>
+                    <td>{{ dragonTreasure.name }}</td>
+                    <td>{{ dragonTreasure.description | length >30 ? dragonTreasure.description|slice(0, 30) ~ '...' : dragonTreasure.description }}</td>
+                    <td>{{ dragonTreasure.value }}</td>
+                    <td>{{ dragonTreasure.coolFactor }}</td>
+                    <td>{{ dragonTreasure.createdAt|date('Y-m-d H:i:s') }}</td>
+                    <td>{{ dragonTreasure.isPublished ? 'Yes' : 'No' }}</td>
+                    <td>{{ dragonTreasure.owner.username }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ knp_pagination_render(dragonTreasures) }}
+    </div>
 {% endblock %}
 

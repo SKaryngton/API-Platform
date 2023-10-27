@@ -13,6 +13,9 @@
             "./src/ApiResource/.gitignore"
         ]
     },
+    "babdev/pagerfanta-bundle": {
+        "version": "v4.2.1"
+    },
     "doctrine/doctrine-bundle": {
         "version": "2.10",
         "recipe": {
@@ -51,6 +54,9 @@
             "./config/packages/doctrine_migrations.yaml",
             "./migrations/.gitignore"
         ]
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v6.2.0"
     },
     "nelmio/cors-bundle": {
         "version": "2.3",
