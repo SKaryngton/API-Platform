@@ -15,28 +15,28 @@
 
         <!-- Dropdown for selecting user -->
         <div class="mb-3">
-            {{ form_start(userSelectForm) }}
+            {{ form_start(userSelectForm, {'attr': {'class': 'd-flex justify-content-between'}}) }}
 
-                <div class="row">
-                    <div class="col">
+
+
                         {{ form_widget(userSelectForm.user) }}
-                    </div>
 
-                    <div class="col">
+
+                    <div class="d-flex justify-content-between align-items-center" >
                         {{ form_label(userSelectForm.startDate) }}
-                        {{ form_widget(userSelectForm.startDate) }}
+                        {{ form_widget(userSelectForm.startDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
                     </div>
 
-                    <div class="col">
+                    <div class="d-flex justify-content-between align-items-center" >
                         {{ form_label(userSelectForm.endDate) }}
-                        {{ form_widget(userSelectForm.endDate) }}
+                        {{ form_widget(userSelectForm.endDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
                     </div>
 
-                    <div class="col">
+
                         {{ form_widget(userSelectForm.filter) }}
-                    </div>
 
-            </div>
+
+
             {{ form_end(userSelectForm) }}
         </div>
         <table class="table table-bordered">
