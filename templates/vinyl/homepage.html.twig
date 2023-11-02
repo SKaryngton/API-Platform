@@ -5,45 +5,49 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="my-4 ">List of DragonTreasures and their Owners</h1>
-        <div class="mb-3">
-            {{ form_start(searchForm, {'attr': {'class': 'd-flex justify-content-between'}}) }}
-            {{ form_row(searchForm.query) }}
-            <button type="submit" class="btn btn-primary ">Search</button>
-            {{ form_end(searchForm) }}
+
+        <h1 class="my-5  text-center">DragonTreasures</h1>
+        <div class="mb-5">
+            <div class="mb-2">
+                {{ form_start(searchForm, {'attr': {'id':'searchForm','class': 'd-flex justify-content-between'}}) }}
+                {{ form_row(searchForm.query) }}
+                <button type="submit" class="btn btn-primary ">Search</button>
+                {{ form_end(searchForm) }}
+            </div>
+
+            <!-- Dropdown for selecting user -->
+            <div >
+                {{ form_start(userSelectForm, {'attr': {'id':'userSelectForm','class': 'd-flex justify-content-between'}}) }}
+
+
+
+                {{ form_widget(userSelectForm.user) }}
+
+
+                <div class="d-flex justify-content-between align-items-center" >
+                    {{ form_label(userSelectForm.startDate) }}
+                    {{ form_widget(userSelectForm.startDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center" >
+                    {{ form_label(userSelectForm.endDate) }}
+                    {{ form_widget(userSelectForm.endDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
+                </div>
+
+
+                {{ form_widget(userSelectForm.filter) }}
+
+
+
+                {{ form_end(userSelectForm) }}
+            </div>
         </div>
 
-        <!-- Dropdown for selecting user -->
-        <div class="mb-3">
-            {{ form_start(userSelectForm, {'attr': {'class': 'd-flex justify-content-between'}}) }}
-
-
-
-                        {{ form_widget(userSelectForm.user) }}
-
-
-                    <div class="d-flex justify-content-between align-items-center" >
-                        {{ form_label(userSelectForm.startDate) }}
-                        {{ form_widget(userSelectForm.startDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center" >
-                        {{ form_label(userSelectForm.endDate) }}
-                        {{ form_widget(userSelectForm.endDate,{'attr': {'style':'height:100%;margin-left:5px;'}}) }}
-                    </div>
-
-
-                        {{ form_widget(userSelectForm.filter) }}
-
-
-
-            {{ form_end(userSelectForm) }}
-        </div>
-        <table class="table table-bordered">
+        <table class="table table-bordered" data-controller="datatables">
             <thead>
             <tr>
-                <th scope="col">{{ knp_pagination_sortable(dragonTreasures, 'ID', 'd.id') }}</th>
-                <th scope="col">{{ knp_pagination_sortable(dragonTreasures, 'Name', 'd.name') }}</th>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
                 <th scope="col">Description</th>
                 <th scope="col">Value</th>
                 <th scope="col">CFactor</th>
