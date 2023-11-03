@@ -17,50 +17,71 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default class extends Controller {
 
     connect() {
+
         if (!$.fn.DataTable.isDataTable(this.element)) {
             this.table = $(this.element).DataTable({
-                /*La valeur 'Blfrtip' indique à DataTables d'inclure les boutons (B),
-                le contrôle de la longueur du tableau (l),
-                le filtre de recherche (f),
-                les informations sur la pagination (i),
-                la table elle-même (t),
-                et le contrôle de la pagination (p),
-                Le 'r' dans la valeur 'Blfrtip' pour le paramètre dom de DataTables correspond
-                à l'élément de traitement ("processing display element").
-                Il est utilisé pour afficher un élément qui informe l'utilisateur
-                que la table est en cours de traitement.
-                .*/
+
                 dom: 'Blfrtip',// Define the structure of the table (buttons, length control, filtering input, etc.).
 
-                buttons: [  // Define buttons for exporting data
+                buttons: [ // Define the buttons that should be included
+                    // Define a copy button with a customized title
                     {
-                        extend: 'copy',  // Button to copy data
-                        title: function () {  // Define the title of the exported file
-                            return getExportTitle();  // Call function to generate file title
+                        extend: 'copy',
+                        title: function() {
+                            return getExportFileName();
                         }
                     },
+                    // Define a CSV export button with a customized title
                     {
-                        extend: 'csv',  // Button to export data in CSV format
-                        title: function () {  // Define the title of the exported file
-                            return getExportTitle();  // Call function to generate file title
+                        extend: 'csv',
+                        action: function (e, dt, node, config) {
+                            // Using jQuery to show the modal and backdrop
+                            $('#modalBackdrop').show();
+                            $('#exportModal').show();
+
+                            $('#exportFileName').val(getExportFileName());
+
+                            // Binding the click event with jQuery
+                            $('#confirmExport').off('click').on('click', () => {
+                                // Hide the modal and backdrop using jQuery
+                                $('#modalBackdrop').hide();
+                                $('#exportModal').hide();
+
+                                // Set the new filename from the input value
+                                config.filename = $('#exportFileName').val();
+
+                                // Execute the default export action with the updated configuration
+                                $.fn.dataTable.ext.buttons.csvHtml5.action.call(this, e, dt, node, config);
+                            });
+
+                            // Binding the click event with jQuery
+                            $('#cancelExport').off('click').on('click', () => {
+                                // Hide the modal and backdrop using jQuery
+                                $('#modalBackdrop').hide();
+                                $('#exportModal').hide();
+                            });
+
                         }
                     },
+                    // Define an Excel export button with a customized title
                     {
-                        extend: 'excel',  // Button to export data in Excel format
-                        title: function () {  // Define the title of the exported file
-                            return getExportTitle();  // Call function to generate file title
+                        extend: 'excel',
+                        title:  function() {
+                            return getExportFileName();
                         }
                     },
+                    // Define a PDF export button with a customized title
                     {
-                        extend: 'pdf',  // Button to export data in PDF format
-                        title: function () {  // Define the title of the exported file
-                            return getExportTitle();  // Call function to generate file title
+                        extend: 'pdf',
+                        title: function() {
+                            return getExportFileName();
                         }
                     },
+                    // Define a print button with a customized title
                     {
-                        extend: 'print',  // Button to print data
-                        title: function () {  // Define the title of the exported file
-                            return getExportTitle();  // Call function to generate file title
+                        extend: 'print',
+                        title: function() {
+                            return getExportFileName();
                         }
                     }
                 ],
@@ -144,8 +165,9 @@ export default class extends Controller {
                 }
             });
         }
+
         // Function to generate the export file name based on the values of userSelectForm fields
-        function getExportTitle() {
+        function getExportFileName() {
             const username = $('#userSelectForm_user option:selected').text();  // Get the text of the selected option in the username field from userSelectForm
             const startDate = $('#userSelectForm_startDate').val();  // Get the value of the startDate field from userSelectForm
             const endDate = $('#userSelectForm_endDate').val();  // Get the value of the endDate field from userSelectForm
@@ -166,6 +188,8 @@ export default class extends Controller {
             }
             return title;  // Return the title
         }
+
+
 
 
     }
